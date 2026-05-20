@@ -35,6 +35,8 @@ def main(frames_dir, output_path, GOP=8, Q=1.0, search_range=8):
     
     print(f"Encoding {metadata['num_frames']} frames from {frames_dir}...")
     
+    recon_Y = None
+
     for i, path in enumerate(frame_paths):
         frame = cv2.imread(path)
         if frame is None:
@@ -43,7 +45,7 @@ def main(frames_dir, output_path, GOP=8, Q=1.0, search_range=8):
             
         is_iframe = (i % GOP == 0)
         
-        recon_Y = None
+        
         
         if is_iframe:
             Y, Cb, Cr = bgr_to_ycbcr(frame)
